@@ -18,7 +18,7 @@ const getUsers = async (req, res) => {
 //la tabla "registerUser" es en la cual se registraran las personas que usen RegisterScreen
 const createUser = async (req, res) => {
     console.log("se hizo un POST a registerUser");
-    const { username, email, contraseña } = req.body;
+    const { username, email, contraseña} = req.body;
     console.log("username: " + username, "email: " + email, "contraseña: " + contraseña);
     const response = await pool.query('INSERT INTO registerUser (username, email, contraseña) VALUES ($1, $2, $3)', [username, email, contraseña]);
     console.log(response.rows);
@@ -34,9 +34,17 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
     console.log("entro a loguear user")
 
-    //deberia traer el username y contraseña, y si existe loguearse.
+    const { username, contraseña} = req.body;
+    console.log("username: " + username,"contraseña: " + contraseña);
+    const response = await pool.query('INSERT INTO registerUser (username, contraseña) VALUES ($1, $2)', [username, contraseña]);
+    console.log(response.rows);
+    res.json({
+        message: 'Usuario logueado correctamente!',
+        body: {
+            usersadmin: { username, contraseña }
+        }
+    })
 }
-
 const getUserById = async (req, res) => {
     console.log("se hizo un GET por ID de todos los usuarios")
     const id = req.params.id;

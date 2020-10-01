@@ -9,7 +9,7 @@ import Menus from '../components/Menus';
 
 const CalendarScreen = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
-    return (
+    return ( alert("Bienvenido, has iniciado sesión. Disfruta al maximo de nuetras noticias y eventos."),
         <View style={styles.container}>
             <View style={styles.container2}>
                 <Menus />

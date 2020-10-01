@@ -10,7 +10,8 @@ const RegisterScreen = ({
 
     async function submitData()
     {
-        fetch('localhost:3600/users/', {
+        const urlPostman = 'http://localhost:3600/users/';
+        fetch(urlPostman, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
