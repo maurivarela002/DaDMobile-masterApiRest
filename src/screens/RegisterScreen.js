@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = ({
+    navigation,
+}) => {
+    const [username, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [contraseña, setPassword] = useState('');
+
+    async function submitData()
+    {
+        fetch('localhost:3600/users/', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: username,
+              email: email,
+              contraseña: contraseña,
+            })
+          });
+       navigation.navigate('Login');
+    }
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../Images/logo-diario.png')} />
@@ -10,25 +32,31 @@ const RegisterScreen = ({ navigation }) => {
                 <View style={styles.userDiv}>
                     <Image style={styles.fotos} source={require('../Images/perfil.png')} />
                     <TextInput style={styles.form} placeholder='Usuario'
+                        onChangeText={username => setUserName(username)}
+                        defaultValue={username}
                     />
                 </View>
                 <View style={styles.userDiv}>
                     <Image style={styles.fotos} source={require('../Images/perfil.png')} />
                     <TextInput style={styles.form} placeholder='Correo electronico'
+                        onChangeText={email => setEmail(email)}
+                        defaultValue={email}
                     />
 
                 </View>
 
                 <View style={styles.contDiv}>
                     <Image style={styles.fotos} source={require('../Images/candado.png')} />
-                    <TextInput style={styles.form} placeholder='Contraseña'
+                    <TextInput style={styles.form}
+                        onChangeText={contraseña => setPassword(contraseña)}
+                        defaultValue={contraseña}
+                        secureTextEntry={true}
+                        placeholder='Contraseña'
+                        type="password"
+                        required
                     />
                 </View>
-                <View style={styles.contDiv}>
-                    <Image style={styles.fotos} source={require('../Images/candado.png')} />
-                    <TextInput style={styles.form} placeholder='Repite la contraseña'
-                    />
-                </View>
+
                 <View style={styles.contTexto}>
                     <Text style={styles.info}>
                         Al presionar en <Text style={styles.bold}>"Registrarse"</Text>, aceptas nuestras <Text style={styles.bold}>Condiciones</Text> y la <Text style={styles.bold}>Política de datos y servicios.</Text>
@@ -36,7 +64,7 @@ const RegisterScreen = ({ navigation }) => {
                 </View>
                 <TouchableOpacity
                     style={styles.boton}
-                    onPress={() => { navigation.navigate('Login') }}
+                    onPress={() => { submitData() && console.log(username + ' / ' + email + ' / ' + contraseña) }}
                 >
                     <Text style={styles.reg}>Registrarse</Text>
                 </TouchableOpacity>

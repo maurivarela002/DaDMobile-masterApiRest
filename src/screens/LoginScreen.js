@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../Images/logo-diario.png')} />
@@ -9,16 +11,25 @@ const LoginScreen = ({ navigation }) => {
                 <View style={styles.userDiv}>
                     <Image style={styles.fotos} source={require('../Images/perfil.png')} />
                     <TextInput style={styles.form} placeholder='Usuario'
+                        onChangeText={userName => setUserName(userName)}
+                        defaultValue={userName}
                     />
                 </View>
                 <View style={styles.contDiv}>
                     <Image style={styles.fotos} source={require('../Images/candado.png')} />
                     <TextInput style={styles.form} textContentType='password' placeholder='Contraseña'
+                         onChangeText={password => setPassword(password)}
+                         defaultValue={password}
+                         secureTextEntry={true}
+                         placeholder='Contraseña'
+                         type="password"
+                         required
                     />
                 </View>
                 <TouchableOpacity
                     style={styles.boton}
-                    onPress={() => navigation.navigate('Calendar')}>
+                    onPress={() => navigation.navigate('Calendar') && console.log(userName + '/' + password)}
+                    >
                     <Text style={styles.ini}>Iniciar sesión</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>

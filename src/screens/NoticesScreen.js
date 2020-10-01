@@ -7,11 +7,6 @@ const NoticeScreen = () => {
     return (
         <View style={styles.container}>
             <Notice />
-            <Notice />
-            <Notice />
-            <Notice />
-            <Notice />
-            <Notice />
         </View>
     )
 };
