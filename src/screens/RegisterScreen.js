@@ -10,7 +10,7 @@ const RegisterScreen = ({
 
     async function submitData()
     {
-        const urlPostman = 'http://localhost:3600/users/';
+        const urlPostman = 'http://10.1.15.25:3600/users/';
         fetch(urlPostman, {
             method: 'POST',
             headers: {
