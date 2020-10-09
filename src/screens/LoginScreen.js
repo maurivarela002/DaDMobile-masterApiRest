@@ -2,20 +2,36 @@ import React, { useState } from 'react';
 import { Text, TextInput, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUserName] = useState('');
+    const [contraseña, setPassword] = useState('');
+    const [errortext, setErrortext] = useState('');
 
-    async function submitData()
+
+    function submitData()
     {
-        const urlPostman = 'http://localhost:3600/users/';
-        fetch(urlPostman, {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json'
-            }
-          });
-       navigation.navigate('Login');
+            const urlPostman = 'http://10.1.15.25:3600/login/';
+            fetch(urlPostman, {
+                method: 'post', 
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    contraseña: contraseña,
+                })
+            });
+       
+          setErrortext('');
+          if (!username) {
+              alert('Por Favor completa el campo Usuario');
+              return;
+          }
+          if (!contraseña) {
+              alert('Por Favor completa la contraseña');
+              return;
+          }
+       navigation.navigate('Calendar');
     }
     return (
         <View style={styles.container}>
@@ -24,15 +40,15 @@ const LoginScreen = ({ navigation }) => {
                 <View style={styles.userDiv}>
                     <Image style={styles.fotos} source={require('../Images/perfil.png')} />
                     <TextInput style={styles.form} placeholder='Usuario'
-                        onChangeText={userName => setUserName(userName)}
-                        defaultValue={userName}
+                        onChangeText={username => setUserName(username)}
+                        defaultValue={username}
                     />
                 </View>
                 <View style={styles.contDiv}>
                     <Image style={styles.fotos} source={require('../Images/candado.png')} />
                     <TextInput style={styles.form} textContentType='password' placeholder='Contraseña'
-                        onChangeText={password => setPassword(password)}
-                        defaultValue={password}
+                        onChangeText={contraseña => setPassword(contraseña)}
+                        defaultValue={contraseña}
                         secureTextEntry={true}
                         placeholder='Contraseña'
                         type="password"
@@ -41,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
                 </View>
                 <TouchableOpacity
                     style={styles.boton}
-                    onPress={() =>{submitData() && navigation.navigate('Calendar') && console.log(userName + '/' + password)}}
+                    onPress={() =>{submitData() && console.log(username + '/' + contraseña)}}
                 >
                     <Text style={styles.ini}>Iniciar sesión</Text>
                 </TouchableOpacity>

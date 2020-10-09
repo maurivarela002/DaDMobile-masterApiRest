@@ -3,13 +3,11 @@ import {
     View, StyleSheet, Icon, Alert, Modal,
 } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import { TouchableHighlight } from "react-native-gesture-handler";
-import { ReactBurgerMenu } from "react-burger-menu";
 import Menus from '../components/Menus';
 
 const CalendarScreen = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
-    return ( alert("Bienvenido, has iniciado sesión. Disfruta al maximo de nuetras noticias y eventos."),
+    return ( 
         <View style={styles.container}>
             <View style={styles.container2}>
                 <Menus />

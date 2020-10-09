@@ -7,23 +7,39 @@ const RegisterScreen = ({
     const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [contraseña, setPassword] = useState('');
+    const [errortext, setErrortext] = useState('');
 
-    async function submitData()
-    {
+    function submitData() {
+        //fijarse IPv4 siempre, en caso de no funcionar el fetch, puede ser por que esta mal la IPv4.
         const urlPostman = 'http://10.1.15.25:3600/users/';
+
         fetch(urlPostman, {
             method: 'POST',
             headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json'
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              username: username,
-              email: email,
-              contraseña: contraseña,
+                username: username,
+                email: email,
+                contraseña: contraseña,
             })
-          });
-       navigation.navigate('Login');
+        });
+
+        setErrortext('');
+        if (!username) {
+            alert('Por Favor completa el campo Usuario');
+            return;
+        }
+        if (!email) {
+            alert('Por Favor completa el campo Email , example@gmail.com');
+            return;
+        }
+        if (!contraseña) {
+            alert('Por Favor completa la contraseña');
+            return;
+        }
+        navigation.navigate('Calendar');
     }
     return (
         <View style={styles.container}>

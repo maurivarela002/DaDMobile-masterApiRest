@@ -6,6 +6,6 @@ const { getUsers, getUserById, createUser, loginUser } = require('../controllers
 router.get('/users', getUsers );
 router.get('/users/:id', getUserById);
 router.post('/users', createUser);
-router.post('/users', loginUser)
+router.post('/login', loginUser)
 
 module.exports = router;

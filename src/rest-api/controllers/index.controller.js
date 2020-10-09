@@ -14,8 +14,8 @@ const getUsers = async (req, res) => {
     res.status(200).json(response.rows);
 };
 
+
 //metodo post, es decir postea usuarios
-//la tabla "registerUser" es en la cual se registraran las personas que usen RegisterScreen
 const createUser = async (req, res) => {
     console.log("se hizo un POST a registerUser");
     const { username, email, contraseña} = req.body;
@@ -36,15 +36,38 @@ const loginUser = async (req, res) => {
 
     const { username, contraseña} = req.body;
     console.log("username: " + username,"contraseña: " + contraseña);
-    const response = await pool.query('INSERT INTO registerUser (username, contraseña) VALUES ($1, $2)', [username, contraseña]);
+
+    const query="SELECT id,username,contraseña FROM registerUser AS ru WHERE ru.username = '" + username + "'\;";
+    console.log(query);
+    const response = await pool.query(query);
     console.log(response.rows);
-    res.json({
-        message: 'Usuario logueado correctamente!',
-        body: {
-            usersadmin: { username, contraseña }
+    
+    const body = {}
+
+    const l = response.rows
+    if(l.length == 0){
+        body["message"] = "Usuario Incorrecto"
+        console.log("Usuario Incorrecto");
+    }else{
+        userEncontrado = false;
+        l.forEach(user => { 
+            if(userEncontrado == false && user.contraseña == contraseña){
+                console.log("Deberia loguerse");
+                userEncontrado=true;
+                body["message"] = "Deberia loguerse"
+            }
+        })
+        if(userEncontrado == false){
+            console.log("Contraseña incorrecta");
+            body["message"] = "Contraseña incorrecta"
         }
+    }
+    res.json({
+        message: 'Usuario agregado correctamente!',
+        body: body
     })
 }
+
 const getUserById = async (req, res) => {
     console.log("se hizo un GET por ID de todos los usuarios")
     const id = req.params.id;
