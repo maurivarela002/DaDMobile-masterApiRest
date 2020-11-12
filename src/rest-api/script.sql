@@ -19,9 +19,9 @@ Email varchar(150)not null
 
 create table registerUser (
     id serial primary key,
-    username varchar(100),
-    email varchar(100),
-    contraseña varchar(100)
+    username varchar(100) unique,
+    email varchar(100) unique,
+    contraseña varchar(100) unique
 )
 
 insert into UsersAdmin values ('Pablo Mendez','Pmendez','Pablo','Mendez','Desarrollador Desktop','pablo.mendez@anima.edu.uy')

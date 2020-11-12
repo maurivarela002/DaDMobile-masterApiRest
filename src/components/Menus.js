@@ -8,7 +8,7 @@ const Menus = ({ navigation }) => {
                 <TouchableOpacity onPress={() => { navigation.navigate('Home') }}>
                     <Image style={styles.menu} source={require('../Images/Menu.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => { navigation.navigate('Login') }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Home') }}>
                     <Image style={styles.userlogo} source={require('../Images/userlogo.png')} />
                 </TouchableOpacity>
             </View>

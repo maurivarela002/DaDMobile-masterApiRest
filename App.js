@@ -6,6 +6,7 @@ import RegisterScreen from './src/screens/RegisterScreen';
 import CalendarScreen from './src/screens/CalendarScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import NoticeScreen from './src/screens/NoticesScreen';
+import cambiarContra from './src/screens/newPassword';
 
 const AppNavigator = createStackNavigator(
   {
@@ -15,6 +16,7 @@ const AppNavigator = createStackNavigator(
     Calendar: CalendarScreen,
     Splash: SplashScreen,
     Notice: NoticeScreen,
+    Cambiar: cambiarContra,
   },
   {
 

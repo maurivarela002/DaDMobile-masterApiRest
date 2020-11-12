@@ -62,7 +62,7 @@ const LoginScreen = ({ navigation }) => {
                     <Text style={styles.ini}>Iniciar sesión</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                onPress={() =>alert("Recordala para la proxima")}
+                onPress={() => { navigation.navigate('Cambiar') }}
                 >
                     <Text style={styles.olvide}>
                         Olvidé mi contraseña
