@@ -9,7 +9,7 @@ const LoginScreen = ({ navigation }) => {
 
     function submitData()
     {
-            const urlPostman = 'http://10.1.15.25:3600/login/';
+            const urlPostman = 'http://10.1.14.79:3600/login/';
             fetch(urlPostman, {
                 method: 'post', 
                 headers: {

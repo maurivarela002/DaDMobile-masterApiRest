@@ -8,7 +8,7 @@ const cambiarContra = ({ navigation }) => {
 
 
     function changePasswd(){
-            const urlPostman = 'http://10.1.15.25:3600/cambiar/';
+            const urlPostman = 'http://10.1.14.79:3600/cambiar/';
             fetch(urlPostman, {
                 method: 'post', 
                 headers: {

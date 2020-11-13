@@ -11,7 +11,7 @@ const RegisterScreen = ({
 
     function submitData() {
         //fijarse IPv4 siempre, en caso de no funcionar el fetch, puede ser por que esta mal la IPv4.
-        const urlPostman = 'http://10.1.15.25:3600/register/';  
+        const urlPostman = 'http://10.1.14.79:3600/register/';  
         fetch(urlPostman, {
             method: 'POST',
             headers: {
